@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 2s ease-in-out;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    animation: fadeIn 2s ease-in-out 0.5s both;
+}
+
+.birthdate {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: 10px;
+    display: inline-block;
+    animation: fadeIn 2s ease-in-out 1s both;
+}
+
+.hidden-message {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 2rem auto;
+    max-width: 600px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 2s ease-in-out 1.5s both;
+}
+
+.hidden-message::before {
+    content: "Click to reveal a secret message";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.hidden-message:hover::before,
+.hidden-message.revealed::before {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.countdown {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 2rem auto;
+    max-width: 600px;
+    animation: fadeIn 2s ease-in-out 2s both;
+}
+
+.countdown-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.countdown-item {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    min-width: 80px;
+}
+
+.countdown-number {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.music-control:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+.music-control i {
+    font-size: 1.5rem;
+}
+
+/* Floating elements */
+.floating {
+    position: absolute;
+    z-index: 1;
+}
+
+.heart {
+    color: #ff6b6b;
+    font-size: 1.5rem;
+}
+
+.balloon {
+    width: 40px;
+    height: 60px;
+    border-radius: 50%;
+    position: relative;
+    animation: rise linear forwards;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.flower {
+    font-size: 1.8rem;
+}
+
+.star {
+    color: #f9ca24;
+    font-size: 1.5rem;
+}
+
+/* Animations */
+@keyframes rise {
+    from {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(10deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .birthdate {
+        font-size: 1.2rem;
+    }
+    
+    .countdown-timer {
+        flex-wrap: wrap;
+    }
+}
