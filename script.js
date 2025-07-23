@@ -1,128 +1,169 @@
-// Create floating elements
-function createFloatingElements() {
-    const elements = ['heart', 'balloon', 'flower', 'star'];
-    const colors = ['#ff6b6b', '#74b9ff', '#f9ca24', '#55efc4', '#a29bfe', '#ff7979', '#badc58'];
-    const flowerIcons = ['🌸', '🌹', '🌺', '🌻', '🌼', '🌷', '💐'];
-    
-    // Create balloons and flowers that rise from the bottom
-    setInterval(() => {
-        const element = document.createElement('div');
-        const type = Math.random() > 0.5 ? 'balloon' : 'flower';
-        element.className = `floating ${type}`;
-        
-        // Random position at bottom
-        const left = Math.random() * 100;
-        element.style.left = `${left}vw`;
-        element.style.bottom = '-50px';
-        
-        // Random animation duration
-        const duration = 5 + Math.random() * 10;
-        element.style.animationDuration = `${duration}s`;
-        
-        // Customize based on type
-        if (type === 'balloon') {
-            element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        } else if (type === 'flower') {
-            element.innerHTML = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
-            element.style.fontSize = `${1 + Math.random() * 2}rem`;
-        }
-        
-        document.body.appendChild(element);
-        
-        // Remove element after animation completes
-        setTimeout(() => {
-            element.remove();
-        }, duration * 1000);
-    }, 800);
-    
-    // Create other floating elements (hearts, stars)
-    for (let i = 0; i < 20; i++) {
-        const element = document.createElement('div');
-        const type = Math.random() > 0.5 ? 'heart' : 'star';
-        element.className = `floating ${type}`;
-        
-        // Random position
-        const left = Math.random() * 100;
-        const top = Math.random() * 100;
-        element.style.left = `${left}vw`;
-        element.style.top = `${top}vh`;
-        
-        // Random animation duration and delay
-        const duration = 3 + Math.random() * 7;
-        const delay = Math.random() * 5;
-        element.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
-        
-        if (type === 'heart') {
-            element.innerHTML = '<i class="fas fa-heart"></i>';
-            element.style.color = colors[Math.floor(Math.random() * colors.length)];
-        } else if (type === 'star') {
-            element.innerHTML = '<i class="fas fa-star"></i>';
-            element.style.color = colors[Math.floor(Math.random() * colors.length)];
-        }
-        
-        document.body.appendChild(element);
+body {
+    background: linear-gradient(to bottom right, #FFD700, #F4A460, #8B4513);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.5s ease;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #FFD700;
+    margin-bottom: 16px;
+    animation: bounce 1.5s infinite;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #8B4513;
+    margin-bottom: 24px;
+}
+
+.birthdate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 32px;
+}
+
+.birthdate i {
+    color: #FFD700;
+}
+
+button#messageToggle {
+    padding: 8px 24px;
+    background: #8B4513;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-bottom: 24px;
+}
+
+button#messageToggle:hover {
+    background: #A0522D;
+}
+
+.hidden-message {
+    padding: 16px;
+    background: #FFFACD;
+    border-radius: 8px;
+    color: #1f2937;
+    margin-bottom: 32px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.hidden-message:not(.hidden) {
+    opacity: 1;
+    max-height: 200px;
+}
+
+.hidden-message p {
+    font-size: 1.125rem;
+    margin: 0;
+}
+
+.countdown {
+    background: #F5F5DC;
+    padding: 24px;
+    border-radius: 8px;
+}
+
+.countdown-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #8B4513;
+    margin-bottom: 16px;
+}
+
+.countdown-timer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+.countdown-item div:last-child {
+    color: #4b5563;
+}
+
+.music-control {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    padding: 12px;
+    background: #8B4513;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.music-control:hover {
+    background: #A0522D;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
     }
 }
 
-// Hidden message
-document.getElementById('hiddenMessage').addEventListener('click', function() {
-    this.classList.add('revealed');
-});
-
-// Music control
-const musicControl = document.getElementById('musicControl');
-const bgMusic = document.getElementById('bgMusic');
-
-musicControl.addEventListener('click', function() {
-    if (bgMusic.paused) {
-        bgMusic.play();
-        musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-    } else {
-        bgMusic.pause();
-        musicControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+@media (max-width: 640px) {
+    .container {
+        padding: 16px;
     }
-});
 
-// Countdown to next birthday
-function updateCountdown() {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    
-    // Set birthday (June 15) - change this to the actual birthday
-    let nextBirthday = new Date(currentYear, 5, 15); // Month is 0-indexed (5 = June)
-    
-    // If birthday has already passed this year, set to next year
-    if (now > nextBirthday) {
-        nextBirthday = new Date(currentYear + 1, 5, 15);
+    h1 {
+        font-size: 2rem;
     }
-    
-    const diff = nextBirthday - now;
-    
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .countdown-timer {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
-
-// Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    createFloatingElements();
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-    
-    // Try to autoplay music (may be blocked by browser)
-    document.addEventListener('click', function() {
-        if (bgMusic.paused) {
-            bgMusic.play().then(() => {
-                musicControl.innerHTML = '<i class="fas fa-volume-up"></i>';
-            }).catch(error => {
-                console.log("Autoplay was prevented");
-            });
-        }
-    }, { once: true });
-});
